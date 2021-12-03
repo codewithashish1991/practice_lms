@@ -1,0 +1,66 @@
+Account Module:
+	register student
+	login student
+	forgot password
+	reset password
+	Profile:
+		- Update Profile
+		- Change Password
+		- My courses
+		- Student reviews (Teacher)
+	myorders
+	wishlist
+
+Category Module:
+	list category by module type
+		- blog category (simple)
+		- course category(nested)
+
+Course Module:
+	list Courses
+		- like course
+	detail single course
+		- add review
+		- list reviews
+		- enroll user/checkout with out add to cart.
+
+Event Module
+	list events
+	details event
+		- counter for event
+		- book your seat
+
+Teacher Module
+	list teachers
+	teacher profile
+		- Reviews
+		- Course
+
+Blog Module
+	blog list
+		- category list + search
+	blog details
+		- comments list with load more button or scroll down
+		- add comment/replay
+
+Shop Module:
+	shop list
+		add to wishlist.
+		add to cart.
+		buy now
+	shop details
+		add to cart
+		add review
+		list review
+
+Carrer Module
+	request for job.
+	request to vendor account.
+
+Conatact Us Module
+	for any query.
+
+
+Chat Module
+	Student/Teacher chat
+

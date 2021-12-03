@@ -1,0 +1,71 @@
+version: '2.1'
+
+services:
+  web:
+    image: ashish/ui:latest
+    command: httpd-foreground
+    ports:
+      - "3001:5000"
+    depends_on:
+      - rest_api
+    stdin_open: true
+    restart: "unless-stopped"
+  rest_api:
+    image: ashish/rest_api:latest
+    command: python3 manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8080:8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+       - /home/ashish/media:/usr/src/app/media
+    environment:
+      DEBUG: 0
+      SECRET_KEY: 'ljslkdfjlksdjflkjsdlfkjl'
+      POSTGRES_PASSWORD: password
+      DJANGO_ALLOWED_HOSTS: localhost 127.0.0.1 [::1]
+    restart: always
+  postgres:
+    restart: always
+    image: postgres:latest
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST: localhost
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db_lms
+      PGDATA: /data/postgres
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d db_lms"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: dimpy567@ashish.in
+      PGADMIN_DEFAULT_PASSWORD: AC!z5N(aRqFd5qgA#Abd7Y
+      SERVER_MODE: "TRUE"
+    volumes:
+       - pgadmin:/root/.pgadmin
+    ports:
+      - "5050:80"
+    links:
+      - postgres:postgres
+    networks:
+      - default
+    restart: always
+    depends_on:
+      - "postgres"
+
+volumes:
+  db-data:
+  postgres:
+  pgadmin:

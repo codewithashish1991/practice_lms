@@ -1,0 +1,31 @@
+---
+extends:
+  - 'airbnb-base'
+  - plugin:import/errors
+  - plugin:import/warnings
+parser: "babel-eslint"
+plugins:
+  - "react"
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+env:
+  browser: true
+  jasmine: true
+  jest: true
+globals:
+  eonavApp: true
+  ol: true
+rules:
+  indent:
+    - error
+    - 4
+  react/jsx-uses-react: "error"
+  react/jsx-uses-vars: "error"
+  import/extensions: "off"
+  import/no-unresolved: "off"
+  import/no-extraneous-dependencies: "off"
+  function-paren-newline: ["error", "consistent"]
+  import/prefer-default-export: "off"
+  class-methods-use-this: 0
+
